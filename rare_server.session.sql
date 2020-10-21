@@ -1,33 +1,33 @@
 CREATE TABLE `user` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `email` varchar(255),
-  `first_name` varchar(255),
-  `last_name` varchar(255),
-  `username` varchar(255),
-  `password` varchar(255)
+  `email` TEXT,
+  `first_name` TEXT,
+  `last_name` TEXT,
+  `username` TEXT,
+  `password` TEXT
 );
 
 CREATE TABLE `post` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `user_id` INTEGER,
   `category_id` INTEGER,
-  `title` varchar(255),
-  `content` varchar(255),
+  `title` TEXT,
+  `content` TEXT,
   `publication_time` INTEGER,
   `creation_time` INTEGER,
-  `image` url,
+  `image` TEXT,
   `publish_status` boolean,
   `approve_status` boolean
 );
 
 CREATE TABLE `category` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `name` varchar(255)
+  `name` TEXT
 );
 
 CREATE TABLE `tag` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `name` varchar(255)
+  `name` TEXT
 );
 
 CREATE TABLE `post_tag` (
