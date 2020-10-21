@@ -52,7 +52,7 @@ INSERT INTO 'category' VALUES (null, 'Funnies');
 INSERT INTO 'tag' VALUES (null, 'gossip');
 INSERT INTO 'tag' VALUES (null, 'fake news');
 INSERT INTO 'tag' VALUES (null, 'clickbait');
-INSERT INTO 'tag' VALUES (null, 'real potlitic');
+INSERT INTO 'tag' VALUES (null, 'realpolitik');
 INSERT INTO 'tag' VALUES (null, 'sensationalism');
 
 
