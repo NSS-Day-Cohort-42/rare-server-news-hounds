@@ -66,7 +66,6 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_tag(id)}"
                 else:
                     response = f"{get_all_tags()}"        
-            
             # elif resource == "otherResource":
             # ...
             elif resource == "users":
