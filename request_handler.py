@@ -1,3 +1,4 @@
+from categories.request import create_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 import json
@@ -78,8 +79,8 @@ class HandleRequests(BaseHTTPRequestHandler):
         new_item = None
 
         # POST resource method logic 
-        # if resource == " ":
-        #   new_item = yourCreate_handler(post_body)
+        if resource == "categories":
+          new_item = create_category(post_body)
         # elif resource == " ":
         #   new_item = yourCreate_handler(post_body)
         #...

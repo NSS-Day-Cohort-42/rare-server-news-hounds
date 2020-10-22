@@ -1,3 +1,4 @@
+from models import category
 import sqlite3
 import json
 from models import Category
@@ -34,3 +35,16 @@ def get_single_category(id):
         row = db_cursor.fetchone()
         category = Category(row['id'], row['name'])
         return json.dumps(category.__dict__)
+
+def create_category(category):
+    with sqlite3.connect("./rare.db") as conn:
+        db_cursor = conn.cursor()
+        db_cursor.execute("""
+        INSERT INTO Category
+            (name)
+        VALUES
+            (?)    
+        """, (category['name'],))
+        id = db_cursor.lastrowid
+        category['id'] = id
+    return json.dumps(category)
