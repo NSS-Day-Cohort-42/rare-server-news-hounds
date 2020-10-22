@@ -52,6 +52,8 @@ INSERT INTO 'tag' VALUES (null, 'clickbait');
 INSERT INTO 'tag' VALUES (null, 'realpolitik');
 INSERT INTO 'tag' VALUES (null, 'sensationalism');
 
+INSERT INTO 'user' VALUES (null, 'bryan@ford.com', 'bryan', 'ford', 'fordba', 'password')
+INSERT INTO 'user' VALUES (null, 'another@person.com', 'another', 'person', 'anperson', 'password')
 
 SELECT * FROM 'category';
 SELECT * FROM 'post';
