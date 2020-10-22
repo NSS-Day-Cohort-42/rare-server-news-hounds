@@ -1,6 +1,7 @@
 from categories.request import create_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
+from users import get_all_users, get_single_user, create_user
 import json
 
 
@@ -58,6 +59,11 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_all_categories()}"
             # elif resource == "otherResource":
             # ...
+            elif resource == "users":
+                if id is not None:
+                    response = f"{get_single_user(id)}"
+                else:
+                    response = f"{get_all_users()}"
 
         elif len(parsed) == 3:
              (resource,key,value ) = parsed
@@ -84,6 +90,8 @@ class HandleRequests(BaseHTTPRequestHandler):
         # elif resource == " ":
         #   new_item = yourCreate_handler(post_body)
         #...
+        elif resource == "users":
+          new_item = create_user(post_body)
 
         self.wfile.write(f"{new_item}".encode())
 
