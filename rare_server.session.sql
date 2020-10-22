@@ -1,41 +1,41 @@
 CREATE TABLE `user` (
-  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `email` TEXT,
-  `first_name` TEXT,
-  `last_name` TEXT,
-  `username` TEXT,
-  `password` TEXT
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `email` TEXT NOT NULL,
+  `first_name` TEXT NOT NULL,
+  `last_name` TEXT NOT NULL,
+  `username` TEXT NOT NULL,
+  `password` TEXT NOT NULL
 );
 
 CREATE TABLE `category` (
-  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT NOT NULL
 );
 
 CREATE TABLE `tag` (
-  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT NOT NULL
 );
 
 CREATE TABLE `post_tag` (
-  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `post_id` INTEGER,
-  `tag_id` INTEGER,
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `post_id` INTEGER NOT NULL,
+  `tag_id` INTEGER NOT NULL,
   FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
   FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
 );
 
 CREATE TABLE `post` (
-  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `user_id` INTEGER,
-  `category_id` INTEGER,
-  `title` TEXT,
-  `content` TEXT,
-  `publication_time` INTEGER,
-  `creation_time` INTEGER,
-  `image` TEXT,
-  `publish_status` boolean,
-  `approve_status` boolean,
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `user_id` INTEGER NOT NULL,
+  `category_id` INTEGER NOT NULL,
+  `title` TEXT NOT NULL,
+  `content` TEXT NOT NULL,
+  `publication_time` INTEGER NOT NULL,
+  `creation_time` INTEGER NOT NULL,
+  `image` TEXT NOT NULL,
+  `publish_status` boolean NOT NULL,
+  `approve_status` boolean NOT NULL,
   FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 );
