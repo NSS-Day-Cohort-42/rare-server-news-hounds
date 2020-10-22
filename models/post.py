@@ -1,5 +1,6 @@
 class Post:
-    def __init__(self, title, content, publication_time, creation_time, image, publish_status, approve_status, user_id, category_id):
+    def __init__(self, id, title, content, publication_time, creation_time, image, publish_status, approve_status, user_id, category_id):
+        self.id = id
         self.title = title
         self.content = content
         self.publication_time = publication_time
