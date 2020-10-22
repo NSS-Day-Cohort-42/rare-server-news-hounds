@@ -11,7 +11,7 @@ def get_all_categories():
         SELECT
             c.id,
             c.name
-        FROM Category c    
+        FROM category c    
         """)
         categories = []
         dataset = db_cursor.fetchall()
@@ -29,7 +29,7 @@ def get_single_category(id):
         SELECT 
             c.id,
             c.name
-        FROM Category c
+        FROM category c
         WHERE c.id = ?    
         """, (id, ))    
         row = db_cursor.fetchone()
@@ -40,7 +40,7 @@ def create_category(category):
     with sqlite3.connect("./rare.db") as conn:
         db_cursor = conn.cursor()
         db_cursor.execute("""
-        INSERT INTO Category
+        INSERT INTO category
             (name)
         VALUES
             (?)    
