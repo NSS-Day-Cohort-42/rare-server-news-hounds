@@ -67,6 +67,7 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         elif len(parsed) == 3:
              (resource,key,value ) = parsed
+
             # if key == "yourKey" and resource == "yourResource":
             #     response = get_yourResource_by_yourKey(value)
             # ...
