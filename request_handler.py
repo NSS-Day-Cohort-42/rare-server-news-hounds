@@ -3,6 +3,7 @@ from categories.request import create_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 from users import get_all_users, get_single_user, create_user
+from posts import get_posts_by_user_id
 import json
 
 
@@ -67,10 +68,14 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_all_users()}"
 
         elif len(parsed) == 3:
-             (resource,key,value ) = parsed
+            (resource,key,value ) = parsed
+
             # if key == "yourKey" and resource == "yourResource":
             #     response = get_yourResource_by_yourKey(value)
             # ...
+
+            if resource == "posts" and key == "user_id":
+                response = get_posts_by_user_id(value)
 
         self.wfile.write(response.encode())
 
