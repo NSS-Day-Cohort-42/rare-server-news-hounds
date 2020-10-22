@@ -1,5 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from categories import get_all_categories, get_single_category
 import json
+
 
 class HandleRequests(BaseHTTPRequestHandler):
     def parse_url(self, path):
@@ -17,7 +19,6 @@ class HandleRequests(BaseHTTPRequestHandler):
             return (resource,key,value )
 
         else:
-
             id = None
             try:
                 id = int(path_params[2])
@@ -49,11 +50,11 @@ class HandleRequests(BaseHTTPRequestHandler):
         if len(parsed) == 2:
             (resource, id) = self.parse_url(self.path)
 
-            # if resource == "yourResource":
-            #     if id is not None:
-            #         response = f"{get_single_yourResource(id)}"
-            #     else:
-            #         response = f"{get_all_yourResource()}"
+            if resource == "categories":
+                if id is not None:
+                    response = f"{get_single_category(id)}"
+                else:
+                    response = f"{get_all_categories()}"
             # elif resource == "otherResource":
             # ...
 
