@@ -4,7 +4,7 @@ from categories.request import create_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 from users import get_all_users, get_single_user, create_user
-from posts import get_posts_by_user_id, create_post
+from posts import get_posts_by_user_id, create_post, get_all_posts, get_single_post
 import json
 
 
@@ -65,7 +65,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 if id is not None:
                     response = f"{get_single_tag(id)}"
                 else:
-                    response = f"{get_all_tags()}"        
+                    response = f"{get_all_tags()}"   
+            elif resource == "posts":
+                if id is not None:
+                    response = f"{get_single_post(id)}"
+                else:
+                    response = f"{get_all_posts()}"            
             # elif resource == "otherResource":
             # ...
             elif resource == "users":
