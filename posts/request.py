@@ -64,7 +64,7 @@ def get_posts_by_user_id(user_id):
             p.publish_status,
             p.approve_status,
             p.user_id,
-            p.post_id
+            p.category_id
         FROM post p
         WHERE p.user_id = ?
         """, ( user_id, ))
