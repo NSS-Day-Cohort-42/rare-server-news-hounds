@@ -1,49 +1,49 @@
 import sqlite3
 import json
-from models import Category
+from models import Tag
 
-def get_all_categories():
+def get_all_tags():
     with sqlite3.connect("./rare.db") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
         db_cursor.execute("""
         SELECT
-            c.id,
-            c.name
-        FROM category c    
+            t.id,
+            t.name
+        FROM tag t    
         """)
-        categories = []
+        tags = []
         dataset = db_cursor.fetchall()
         for row in dataset:
-            category = Category(row['id'], row['name'])
-            categories.append(category.__dict__)
+            tag = Tag(row['id'], row['name'])
+            tags.append(tag.__dict__)
 
-        return json.dumps(categories)    
+        return json.dumps(tags)    
 
-def get_single_category(id):
+def get_single_tag(id):
     with sqlite3.connect("./rare.db") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
         db_cursor.execute("""
         SELECT 
-            c.id,
-            c.name
-        FROM category c
+            t.id,
+            t.name
+        FROM tag t
         WHERE c.id = ?    
         """, (id, ))    
         row = db_cursor.fetchone()
-        category = Category(row['id'], row['name'])
-        return json.dumps(category.__dict__)
+        tag = Tag(row['id'], row['name'])
+        return json.dumps(tag.__dict__)
 
-def create_category(category):
+def create_tag(tag):
     with sqlite3.connect("./rare.db") as conn:
         db_cursor = conn.cursor()
         db_cursor.execute("""
-        INSERT INTO category
+        INSERT INTO tag
             (name)
         VALUES
             (?)    
-        """, (category['name'],))
+        """, (tag['name'],))
         id = db_cursor.lastrowid
-        category['id'] = id
-    return json.dumps(category)
+        tag['id'] = id
+    return json.dumps(tag)
