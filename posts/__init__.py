@@ -1,1 +1,1 @@
-from .request import get_posts_by_user_iq
+from .request import get_posts_by_user_id
