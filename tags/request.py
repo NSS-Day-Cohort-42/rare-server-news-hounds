@@ -29,7 +29,7 @@ def get_single_tag(id):
             t.id,
             t.name
         FROM tag t
-        WHERE c.id = ?    
+        WHERE t.id = ?    
         """, (id, ))    
         row = db_cursor.fetchone()
         tag = Tag(row['id'], row['name'])
