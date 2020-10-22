@@ -1,3 +1,4 @@
+from tags import get_single_tag, get_all_tags, create_tag
 from login import handleLogin
 from categories.request import create_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -59,6 +60,13 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_category(id)}"
                 else:
                     response = f"{get_all_categories()}"
+
+            elif resource == "tags":
+                if id is not None:
+                    response = f"{get_single_tag(id)}"
+                else:
+                    response = f"{get_all_tags()}"        
+            
             # elif resource == "otherResource":
             # ...
             elif resource == "users":
@@ -93,7 +101,9 @@ class HandleRequests(BaseHTTPRequestHandler):
         # POST resource method logic 
         if resource == "categories":
           new_item = create_category(post_body)
-        if resource == "login":
+        elif resource == "tags":
+          new_item = create_tag(post_body)        
+        elif resource == "login":
           new_item = handleLogin(post_body)
         # elif resource == " ":
         #   new_item = yourCreate_handler(post_body)
