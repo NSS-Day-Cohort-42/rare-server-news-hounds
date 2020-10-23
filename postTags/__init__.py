@@ -1,1 +1,1 @@
-from .request import get_post_tag_by_post_id
+from .request import get_postTag_by_post_id, create_postTag

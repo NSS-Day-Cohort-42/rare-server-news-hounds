@@ -1,4 +1,4 @@
-from postTags import get_post_tag_by_post_id
+from postTags import get_postTag_by_post_id, create_postTag
 from tags import get_single_tag, get_all_tags, create_tag
 from login import handleLogin
 from categories.request import create_category
@@ -84,7 +84,7 @@ class HandleRequests(BaseHTTPRequestHandler):
                 response = get_posts_by_user_id(value)
             
             if resource == "post_tags" and key == "post_id":
-                response = get_post_tag_by_post_id(value)
+                response = get_postTag_by_post_id(value)
             
             # if key == "yourKey" and resource == "yourResource":
             #     response = get_yourResource_by_yourKey(value)
@@ -109,16 +109,17 @@ class HandleRequests(BaseHTTPRequestHandler):
           new_item = create_category(post_body)
         elif resource == "tags":
           new_item = create_tag(post_body)        
+        elif resource == "post_tags":
+          new_item = create_postTag(post_body)        
         elif resource == "login":
           new_item = handleLogin(post_body)
+        elif resource == "users":
+          new_item = create_user(post_body)
+        elif resource == "posts":
+            new_item = create_post(post_body)
         # elif resource == " ":
         #   new_item = yourCreate_handler(post_body)
         #...
-        elif resource == "users":
-          new_item = create_user(post_body)
-
-        elif resource == "posts":
-            new_item = create_post(post_body)
         
         self.wfile.write(f"{new_item}".encode())
 
