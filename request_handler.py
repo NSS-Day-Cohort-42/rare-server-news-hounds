@@ -55,29 +55,27 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             if resource == "categories":
                 if id is not None:
-                    response = f"{get_single_category(id)}"
+                    response = get_single_category(id)
                 else:
-                    response = f"{get_all_categories()}"
+                    response = get_all_categories()
 
             elif resource == "tags":
                 if id is not None:
-                    response = f"{get_single_tag(id)}"
+                    response = get_single_tag(id)
                 else:
-                    response = f"{get_all_tags()}"   
+                    response = get_all_tags()  
             elif resource == "posts":
                 if id is not None:
-                    response = f"{get_single_post(id)}"
-                    if response == 'Item not found':
-                        self._set_headers(404)
+                    response = get_single_post(id)
                 else:
-                    response = f"{get_all_posts()}"            
+                    response = get_all_posts()            
             # elif resource == "otherResource":
             # ...
             elif resource == "users":
                 if id is not None:
-                    response = f"{get_single_user(id)}"
+                    response = get_single_user(id)
                 else:
-                    response = f"{get_all_users()}"
+                    response = get_all_users()
 
         elif len(parsed) == 3:
             (resource,key,value ) = parsed
@@ -94,7 +92,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         else:
             self._set_headers(200)
 
-        self.wfile.write(response.encode())
+        self.wfile.write(f"{response}".encode())
 
     def do_POST(self):
         self._set_headers(201)
