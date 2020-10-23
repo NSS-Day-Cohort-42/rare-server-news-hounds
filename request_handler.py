@@ -1,3 +1,4 @@
+from postTags import get_post_tag_by_post_id
 from tags import get_single_tag, get_all_tags, create_tag
 from login import handleLogin
 from categories.request import create_category
@@ -61,6 +62,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_categories()}"
 
+            elif resource == "users":
+                if id is not None:
+                    response = f"{get_single_user(id)}"
+                else:
+                    response = f"{get_all_users()}"
+            
             elif resource == "tags":
                 if id is not None:
                     response = f"{get_single_tag(id)}"
@@ -69,21 +76,20 @@ class HandleRequests(BaseHTTPRequestHandler):
             
             # elif resource == "otherResource":
             # ...
-            elif resource == "users":
-                if id is not None:
-                    response = f"{get_single_user(id)}"
-                else:
-                    response = f"{get_all_users()}"
 
         elif len(parsed) == 3:
             (resource,key,value ) = parsed
-
+            
+            if resource == "posts" and key == "user_id":
+                response = get_posts_by_user_id(value)
+            
+            if resource == "post_tags" and key == "post_id":
+                response = get_post_tag_by_post_id(value)
+            
             # if key == "yourKey" and resource == "yourResource":
             #     response = get_yourResource_by_yourKey(value)
             # ...
 
-            if resource == "posts" and key == "user_id":
-                response = get_posts_by_user_id(value)
 
         self.wfile.write(response.encode())
 
