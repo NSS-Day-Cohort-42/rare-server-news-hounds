@@ -138,3 +138,24 @@ def create_post(new_post):
     id = db_cursor.lastrowid
     new_post['id'] = id
     return json.dumps(new_post)
+
+def delete_post(id):
+    with sqlite3.connect("./rare.db") as conn:
+        db_cursor = conn.cursor()
+        db_cursor.execute("""
+        DELETE FROM post
+        WHERE id = ?
+        """, ( id, ))
+
+        rows_affected = db_cursor.rowcount
+        success = rows_affected > 0
+
+        # we successfully found and deleted a post with the given id - 
+        # now delete any post_tag rows with this post_id
+        if(success):
+            db_cursor.execute("""
+            DELETE FROM post_tag
+            WHERE post_id = ?
+            """, ( id, ))
+
+        return success
