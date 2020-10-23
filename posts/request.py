@@ -20,7 +20,9 @@ def get_all_posts():
             p.user_id,
             p.category_id,
             c.name category_name,
-            u.username
+            u.username,
+            u.first_name,
+            u.last_name
         FROM post p
         JOIN Category c on c.id = p.category_id
         JOIN user u on u.id = p.user_id
@@ -33,7 +35,7 @@ def get_all_posts():
                         row['creation_time'], row['image'], row['publish_status'],
                         row['approve_status'], row['user_id'], row['category_id'])
             category = Category(row['category_id'], row['category_name'])
-            user = User(row['user_id'], "", "", row['username'], "", "")
+            user = User(row['user_id'], row['first_name'], row['last_name'], row['username'], "", "")
             post.category = category.__dict__
             post.user = user.__dict__
             posts.append(post.__dict__)
@@ -57,7 +59,9 @@ def get_single_post(id):
             p.user_id,
             p.category_id,
             c.name category_name,
-            u.username
+            u.username,
+            u.first_name,
+            u.last_name
         FROM post p
         JOIN Category c on c.id = p.category_id
         JOIN user u on u.id = p.user_id
@@ -68,7 +72,7 @@ def get_single_post(id):
                     row['creation_time'], row['image'], row['publish_status'],
                     row['approve_status'], row['user_id'], row['category_id'])
         category = Category(row['category_id'], row['category_name'])
-        user = User(row['user_id'], "", "", row['username'], "", "")
+        user = User(row['user_id'], row['first_name'], row['last_name'], row['username'], "", "")
         post.category = category.__dict__
         post.user = user.__dict__
         return json.dumps(post.__dict__)
@@ -90,8 +94,14 @@ def get_posts_by_user_id(user_id):
             p.publish_status,
             p.approve_status,
             p.user_id,
-            p.category_id
+            p.category_id,
+            c.name category_name,
+            u.username,
+            u.first_name,
+            u.last_name
         FROM post p
+        JOIN Category c on c.id = p.category_id
+        JOIN user u on u.id = p.user_id
         WHERE p.user_id = ?
         """, ( user_id, ))
 
@@ -104,6 +114,11 @@ def get_posts_by_user_id(user_id):
                         row['approve_status'], row['user_id'], row['category_id'])
 
             posts.append(post.__dict__)
+
+            category = Category(row['category_id'], row['category_name'])
+            user = User(row['user_id'], row['first_name'], row['last_name'], row['username'], "", "")
+            post.category = category.__dict__
+            post.user = user.__dict__
 
         return json.dumps(posts)
 
