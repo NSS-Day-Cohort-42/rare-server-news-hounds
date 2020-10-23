@@ -1,4 +1,4 @@
-from postTags import get_postTag_by_post_id, create_postTag
+from postTags import get_postTag_by_post_id, create_postTag, delete_postTag
 from tags import get_single_tag, get_all_tags, create_tag
 from login import handleLogin
 from categories.request import create_category
@@ -148,6 +148,9 @@ class HandleRequests(BaseHTTPRequestHandler):
         self._set_headers(204)
 
         (resource, id) = self.parse_url(self.path)
+
+        if resource == "post_tags":
+            success = delete_postTag(id)
 
         # if resource == " ":
         #   delete_yourResource(id)
