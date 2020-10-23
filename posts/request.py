@@ -47,3 +47,82 @@ def create_post(new_post):
     id = db_cursor.lastrowid
     new_post['id'] = id
     return json.dumps(new_post)
+
+def get_all_posts():
+   
+    with sqlite3.connect("./rare.db") as conn:
+
+        
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        
+        db_cursor.execute("""
+        SELECT
+            p.id,
+            p.title,
+            p.content,
+            p.publication_time,
+            p.creation_time,
+            p.image,
+            p.publish_status,
+            p.approve_status,
+            p.user_id,
+            p.category_id
+        FROM post p
+        """)
+
+        
+        posts = []
+
+        
+        dataset = db_cursor.fetchall()
+
+       
+        for row in dataset:
+
+            
+            post = Post(row['id'], row['title'], row['content'], row['publication_time'],
+                        row['creation_time'], row['image'], row['publish_status'],
+                        row['approve_status'], row['user_id'], row['category_id'])
+
+
+            posts.append(post.__dict__)
+
+            
+    return json.dumps(posts)
+
+def get_single_post(id):
+    with sqlite3.connect("./rare.db") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        
+        db_cursor.execute("""
+         SELECT
+            p.id,
+            p.title,
+            p.content,
+            p.publication_time,
+            p.creation_time,
+            p.image,
+            p.publish_status,
+            p.approve_status,
+            p.user_id,
+            p.category_id
+        FROM post p
+        WHERE p.id = ?
+        """, ( id, ))
+
+        
+        data = db_cursor.fetchone()
+
+        
+        post = Post(data['id'], data['title'], data['content'], data['publication_time'],
+                        data['creation_time'], data['image'], data['publish_status'],
+                        data['approve_status'], data['user_id'], data['category_id'])
+        
+
+        
+
+        return json.dumps(post.__dict__)

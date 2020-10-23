@@ -55,6 +55,9 @@ INSERT INTO 'tag' VALUES (null, 'sensationalism');
 INSERT INTO 'user' VALUES (null, 'bryan@ford.com', 'bryan', 'ford', 'fordba', 'password');
 INSERT INTO 'user' VALUES (null, 'another@person.com', 'another', 'person', 'anperson', 'password');
 
+INSERT INTO 'post' VALUES (null, 1, 1, 'Local Business Needs More People', 'A local business today decided that they needed more employees', 1, 1, '', true, true);
+INSERT INTO 'post' VALUES (null, 1, 1, 'Test Post', 'Here is the test content.', 1, 1, '', true, true);
+
 SELECT * FROM 'category';
 SELECT * FROM 'post';
 SELECT * FROM 'post_tag';
