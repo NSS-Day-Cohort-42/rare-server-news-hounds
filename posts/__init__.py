@@ -1,1 +1,1 @@
-from .request import get_posts_by_user_id, create_post
+from .request import get_posts_by_user_id, create_post, delete_post

@@ -4,7 +4,7 @@ from categories.request import create_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 from users import get_all_users, get_single_user, create_user
-from posts import get_posts_by_user_id, create_post
+from posts import get_posts_by_user_id, create_post, delete_post
 import json
 
 
@@ -138,16 +138,23 @@ class HandleRequests(BaseHTTPRequestHandler):
         self.wfile.write("".encode())
 
     def do_DELETE(self):
-        self._set_headers(204)
-
         (resource, id) = self.parse_url(self.path)
+        success = False
 
-        # if resource == " ":
-        #   delete_yourResource(id)
+        if resource == "posts":
+            success = delete_post(id)
         # elif resource == " ":
-        #   delete_yourResource(id)
+        #   success = delete_yourResource(id)
         # ...
      
+        # successfully deleted the given resource with the given id
+        if(success):
+            self._set_headers(204) # 204 - No Content
+
+        # the delete query affected zero rows in the database 
+        # or the requested resource to delete doesn't exist / doesn't have a DELETE handler
+        else:
+            self._set_headers(404) # 404 - File Not Found
 
         self.wfile.write("".encode())
 
