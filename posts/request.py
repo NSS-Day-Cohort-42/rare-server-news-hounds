@@ -68,14 +68,17 @@ def get_single_post(id):
         WHERE p.id = ?    
         """, (id, ))    
         row = db_cursor.fetchone()
-        post = Post(row['id'], row['title'], row['content'], row['publication_time'],
+        if row:
+            post = Post(row['id'], row['title'], row['content'], row['publication_time'],
                     row['creation_time'], row['image'], row['publish_status'],
                     row['approve_status'], row['user_id'], row['category_id'])
-        category = Category(row['category_id'], row['category_name'])
-        user = User(row['user_id'], row['first_name'], row['last_name'], row['username'], "", "")
-        post.category = category.__dict__
-        post.user = user.__dict__
-        return json.dumps(post.__dict__)
+            category = Category(row['category_id'], row['category_name'])
+            user = User(row['user_id'], row['first_name'], row['last_name'], row['username'], "", "")
+            post.category = category.__dict__
+            post.user = user.__dict__
+            return json.dumps(post.__dict__)
+        else:
+            return False
 
 
 

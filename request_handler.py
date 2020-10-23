@@ -48,9 +48,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        self._set_headers(200)
         response = {}  
-
         parsed = self.parse_url(self.path)
         if len(parsed) == 2:
             (resource, id) = self.parse_url(self.path)
@@ -69,6 +67,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             elif resource == "posts":
                 if id is not None:
                     response = f"{get_single_post(id)}"
+                    if response == 'Item not found':
+                        self._set_headers(404)
                 else:
                     response = f"{get_all_posts()}"            
             # elif resource == "otherResource":
@@ -88,6 +88,11 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             if resource == "posts" and key == "user_id":
                 response = get_posts_by_user_id(value)
+
+        if response == False:
+            self._set_headers(404)
+        else:
+            self._set_headers(200)
 
         self.wfile.write(response.encode())
 
