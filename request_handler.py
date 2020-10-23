@@ -5,7 +5,7 @@ from categories.request import create_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 from users import get_all_users, get_single_user, create_user
-from posts import get_posts_by_user_id, create_post
+from posts import get_posts_by_user_id, create_post, get_all_posts, get_single_post
 import json
 
 
@@ -49,33 +49,36 @@ class HandleRequests(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        self._set_headers(200)
         response = {}  
-
         parsed = self.parse_url(self.path)
         if len(parsed) == 2:
             (resource, id) = self.parse_url(self.path)
 
             if resource == "categories":
                 if id is not None:
-                    response = f"{get_single_category(id)}"
+                    response = get_single_category(id)
                 else:
-                    response = f"{get_all_categories()}"
+                    response = get_all_categories()
 
             elif resource == "users":
                 if id is not None:
-                    response = f"{get_single_user(id)}"
+                    response = get_single_user(id)
                 else:
-                    response = f"{get_all_users()}"
+                    response = get_all_users()
             
             elif resource == "tags":
                 if id is not None:
-                    response = f"{get_single_tag(id)}"
+                    response = get_single_tag(id)
                 else:
-                    response = f"{get_all_tags()}"        
-            
+                    response = get_all_tags()  
+            elif resource == "posts":
+                if id is not None:
+                    response = get_single_post(id)
+                else:
+                    response = get_all_posts()            
             # elif resource == "otherResource":
             # ...
+            
 
         elif len(parsed) == 3:
             (resource,key,value ) = parsed
@@ -91,7 +94,12 @@ class HandleRequests(BaseHTTPRequestHandler):
             # ...
 
 
-        self.wfile.write(response.encode())
+        if response == False:
+            self._set_headers(404)
+        else:
+            self._set_headers(200)
+
+        self.wfile.write(f"{response}".encode())
 
     def do_POST(self):
         self._set_headers(201)
