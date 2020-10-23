@@ -57,4 +57,14 @@ def delete_post(id):
         """, ( id, ))
 
         rows_affected = db_cursor.rowcount
-        return rows_affected > 0
+        success = rows_affected > 0
+
+        # we successfully found and deleted a post with the given id - 
+        # now delete any post_tag rows with this post_id
+        if(success):
+            db_cursor.execute("""
+            DELETE FROM post_tag
+            WHERE post_id = ?
+            """, ( id, ))
+
+        return success
