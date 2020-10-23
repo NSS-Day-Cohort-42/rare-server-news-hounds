@@ -52,6 +52,11 @@ INSERT INTO 'tag' VALUES (null, 'clickbait');
 INSERT INTO 'tag' VALUES (null, 'realpolitik');
 INSERT INTO 'tag' VALUES (null, 'sensationalism');
 
+INSERT INTO 'post_tag' VALUES (null, '1', '1');
+INSERT INTO 'post_tag' VALUES (null, '1', '2');
+INSERT INTO 'post_tag' VALUES (null, '1', '3');
+INSERT INTO 'post_tag' VALUES (null, '2', '3');
+
 INSERT INTO 'user' VALUES (null, 'bryan@ford.com', 'bryan', 'ford', 'fordba', 'password');
 INSERT INTO 'user' VALUES (null, 'another@person.com', 'another', 'person', 'anperson', 'password');
 
@@ -67,3 +72,4 @@ SELECT * FROM 'user';
 -- DROP TABLE 'post_tag';
 -- DROP TABLE 'tag';
 -- DROP TABLE 'user';
+
