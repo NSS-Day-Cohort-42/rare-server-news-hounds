@@ -32,8 +32,12 @@ def get_single_category(id):
         WHERE c.id = ?    
         """, (id, ))    
         row = db_cursor.fetchone()
-        category = Category(row['id'], row['name'])
-        return json.dumps(category.__dict__)
+
+        if row:
+            category = Category(row['id'], row['name'])
+            return json.dumps(category.__dict__)
+        else:
+            return False
 
 def create_category(category):
     with sqlite3.connect("./rare.db") as conn:
