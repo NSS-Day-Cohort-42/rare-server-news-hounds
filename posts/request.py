@@ -1,6 +1,7 @@
+from models.user import User
 import sqlite3
 import json
-from models import Post
+from models import Post, Category
 
 def get_all_posts():
     with sqlite3.connect("./rare.db") as conn:
@@ -17,8 +18,12 @@ def get_all_posts():
             p.publish_status,
             p.approve_status,
             p.user_id,
-            p.category_id
+            p.category_id,
+            c.name category_name,
+            u.username
         FROM post p
+        JOIN Category c on c.id = p.category_id
+        JOIN user u on u.id = p.user_id
         """)
         posts = []
         dataset = db_cursor.fetchall()
@@ -27,7 +32,10 @@ def get_all_posts():
             post = Post(row['id'], row['title'], row['content'], row['publication_time'],
                         row['creation_time'], row['image'], row['publish_status'],
                         row['approve_status'], row['user_id'], row['category_id'])
-
+            category = Category(row['category_id'], row['category_name'])
+            user = User(row['user_id'], "", "", row['username'], "", "")
+            post.category = category.__dict__
+            post.user = user.__dict__
             posts.append(post.__dict__)
 
         return json.dumps(posts)
@@ -47,14 +55,22 @@ def get_single_post(id):
             p.publish_status,
             p.approve_status,
             p.user_id,
-            p.category_id
+            p.category_id,
+            c.name category_name,
+            u.username
         FROM post p
+        JOIN Category c on c.id = p.category_id
+        JOIN user u on u.id = p.user_id
         WHERE p.id = ?    
         """, (id, ))    
         row = db_cursor.fetchone()
         post = Post(row['id'], row['title'], row['content'], row['publication_time'],
                     row['creation_time'], row['image'], row['publish_status'],
                     row['approve_status'], row['user_id'], row['category_id'])
+        category = Category(row['category_id'], row['category_name'])
+        user = User(row['user_id'], "", "", row['username'], "", "")
+        post.category = category.__dict__
+        post.user = user.__dict__
         return json.dumps(post.__dict__)
 
 
