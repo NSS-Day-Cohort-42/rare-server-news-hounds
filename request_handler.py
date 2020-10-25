@@ -5,7 +5,7 @@ from categories.request import create_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 from users import get_all_users, get_single_user, create_user
-from posts import get_posts_by_user_id, create_post, get_all_posts, get_single_post, delete_post
+from posts import get_posts_by_user_id, create_post, get_all_posts, get_single_post, delete_post, get_posts_by_category_id
 import json
 
 
@@ -89,6 +89,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             if resource == "post_tags" and key == "post_id":
                 response = get_postTag_by_post_id(value)
             
+            if resource == "posts" and key == "category_id":
+                response = get_posts_by_category_id(value)
             # if key == "yourKey" and resource == "yourResource":
             #     response = get_yourResource_by_yourKey(value)
             # ...
