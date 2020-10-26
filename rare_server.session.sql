@@ -73,3 +73,28 @@ SELECT * FROM 'user';
 -- DROP TABLE 'tag';
 -- DROP TABLE 'user';
 
+INSERT INTO post_tag VALUES (null, 1, 1);
+
+SELECT * FROM 'post_tag';
+
+INSERT INTO 'post_tag' VALUES (null, '1', '2');
+INSERT INTO 'post_tag' VALUES (null, '1', '3');
+INSERT INTO 'post_tag' VALUES (null, '2', '3');
+
+ SELECT * FROM post;
+
+ INSERT INTO 'post' VALUES (null, 1, 1, 'Test Post', 'Here is the test content.', 1, 1, '', true, true);
+ INSERT INTO 'post' VALUES (null, 2, 2, 'CONTENT', 'Here is the test content.', 1, 1, '', true, true);
+ INSERT INTO 'post' VALUES (null, 2, 3, 'AWESOME TITLE', 'Here is the test content.', 1, 1, '', true, true);
+ INSERT INTO 'post' VALUES (null, 3, 4, 'ALSO A TITLE', 'Here is the test content.', 1, 1, '', true, true);
+ INSERT INTO 'post' VALUES (null, 3, 2, 'SOME TITLES', 'Here is the test content.', 1, 1, '', true, true);
+ INSERT INTO 'post' VALUES (null, 2, 4, 'YES TITLEEE', 'Here is the test content.', 1, 1, '', true, true);
+ INSERT INTO 'post_tag' VALUES (null, '5', '1');
+
+UPDATE post SET image ='https://www.gannett-cdn.com/media/USATODAY/USATODAY/2013/02/20/c03-barkley-before-13-16_9.jpg' WHERE id = 6; 
+
+INSERT INTO 'post' VALUES (null, 2, 2, 'SOME TITLE', 'Here is STUFF.', 1, 1, 'https://www.gannett-cdn.com/media/USATODAY/USATODAY/2013/02/20/c03-barkley-before-13-16_9.jpg', true, true);
+
+UPDATE post SET publication_time = 1318781876406
+
+INSERT INTO 'post' VALUES (null, 3, 2, 'I NEED', 'SOME TEST DATA', 1, 1, 'https://www.gannett-cdn.com/media/USATODAY/USATODAY/2013/02/20/c03-barkley-before-13-16_9.jpg', true, true);
