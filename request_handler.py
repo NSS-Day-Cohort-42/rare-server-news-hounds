@@ -1,3 +1,4 @@
+from posts.request import update_post
 from postTags import get_postTag_by_post_id, create_postTag, delete_postTag
 from tags import get_single_tag, get_all_tags, create_tag
 from login import handleLogin
@@ -5,7 +6,7 @@ from categories.request import create_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 from users import get_all_users, get_single_user, create_user
-from posts import get_posts_by_user_id, create_post, get_all_posts, get_single_post, delete_post
+from posts import get_posts_by_user_id, create_post, get_all_posts, get_single_post, delete_post, get_posts_by_category_id, update_post
 import json
 
 
@@ -89,6 +90,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             if resource == "post_tags" and key == "post_id":
                 response = get_postTag_by_post_id(value)
             
+            if resource == "posts" and key == "category_id":
+                response = get_posts_by_category_id(value)
             # if key == "yourKey" and resource == "yourResource":
             #     response = get_yourResource_by_yourKey(value)
             # ...
@@ -141,7 +144,9 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         success = False
 
-        # if resource == "yourResource":
+        if resource == "posts":
+            success = update_post(id, post_body)    
+        # if resource == "yourResourcePLURAL":
         #     success = update_yourResource(id, post_body)    
         #  ...
 
