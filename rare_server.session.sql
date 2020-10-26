@@ -98,3 +98,5 @@ INSERT INTO 'post' VALUES (null, 2, 2, 'SOME TITLE', 'Here is STUFF.', 1, 1, 'ht
 UPDATE post SET publication_time = 1318781876406
 
 INSERT INTO 'post' VALUES (null, 3, 2, 'I NEED', 'SOME TEST DATA', 1, 1, 'https://www.gannett-cdn.com/media/USATODAY/USATODAY/2013/02/20/c03-barkley-before-13-16_9.jpg', true, true);
+
+SELECT * FROM  post

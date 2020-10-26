@@ -144,9 +144,9 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         success = False
 
-        if resource == "post":
+        if resource == "posts":
             success = update_post(id, post_body)    
-        # if resource == "yourResource":
+        # if resource == "yourResourcePLURAL":
         #     success = update_yourResource(id, post_body)    
         #  ...
 
