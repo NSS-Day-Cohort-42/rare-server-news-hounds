@@ -202,3 +202,24 @@ def delete_post(id):
             """, ( id, ))
 
         return success
+
+def update_post(id, post):
+    with sqlite3.connect("./rare.db") as conn:
+        db_cursor = conn.cursor()
+        db_cursor.execute("""
+        UPDATE post 
+        SET
+            title = ?,
+            content = ?,
+            publication_time = ?,
+            image = ?,
+            publish_status = ?,
+            approve_status = ?,
+            user_id = ?,
+            category_id = ?
+        WHERE id = ?
+        """, (post['title'], post['content'], post['publication_time'], post['image'], post['publish_status'], post['approve_status'], post['user_id'], post['category_id'], id, ) )
+        if db_cursor.rowcount == 0:
+            return False
+        else: 
+            return True
