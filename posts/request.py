@@ -141,9 +141,13 @@ def get_posts_by_category_id(category_id):
             p.approve_status,
             p.user_id,
             p.category_id,
-            c.name category_name
+            c.name category_name,
+            u.username,
+            u.first_name,
+            u.last_name
         FROM post p
         JOIN Category c on c.id = p.category_id
+        JOIN user u on u.id = p.user_id
         WHERE p.category_id = ?
         """, ( category_id, ))
 
@@ -156,9 +160,10 @@ def get_posts_by_category_id(category_id):
                         row['approve_status'], row['user_id'], row['category_id'])
 
             posts.append(post.__dict__)
-
+            user = User(row['user_id'], row['first_name'], row['last_name'], row['username'], "", "")
             category = Category(row['category_id'], row['category_name'])
             post.category = category.__dict__
+            post.user = user.__dict__
 
 
         return json.dumps(posts)
