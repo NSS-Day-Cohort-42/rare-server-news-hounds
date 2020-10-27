@@ -27,3 +27,9 @@ Installation steps
 Here is a quick overview of the user experience! Users can create posts, filter them by category, and add tags.
 
 ![screen capture](screencapture/RareFilteringAndTagging.gif)
+
+## Database Planning
+
+Here is our Entity Relationship Diagram for this project. 
+
+![screen capture](screencapture/Erd.png)
