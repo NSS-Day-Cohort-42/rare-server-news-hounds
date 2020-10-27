@@ -176,7 +176,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         # the delete query affected zero rows in the database 
         # or the requested resource to delete doesn't exist / doesn't have a DELETE handler
         else:
-            self._set_headers(404) # 404 - File Not Found
+            self._set_headers(404) # 404 - File Not  Found
 
         self.wfile.write("".encode())
 
