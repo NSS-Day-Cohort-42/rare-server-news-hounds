@@ -7,7 +7,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 from users import get_all_users, get_single_user, create_user
 from posts import get_posts_by_user_id, create_post, get_all_posts, get_single_post, delete_post, get_posts_by_category_id, update_post
-from comments import create_comment
+from comments import create_comment 
 import json
 
 
@@ -129,6 +129,8 @@ class HandleRequests(BaseHTTPRequestHandler):
           new_item = create_user(post_body)
         elif resource == "posts":
             new_item = create_post(post_body)
+        elif resource == "comments":
+            new_item = create_comment(post_body)
         # elif resource == " ":
         #   new_item = yourCreate_handler(post_body)
         #...

@@ -9,9 +9,9 @@ def create_comment(comment):
         db_cursor = conn.cursor()
         db_cursor.execute("""
         INSERT INTO comment
-            (content, timestamp, comment_id, user_id)
-        VALUES (?)
-        """), (comment['content'], comment['timestamp'], comment['comment_id'], comment['user_id'], )
+            (content, timestamp, post_id, user_id)
+        VALUES (?, ?, ?, ?)
+        """, (comment['content'], comment['timestamp'], comment['post_id'], comment['user_id'], ))
         id = db_cursor.lastrowid
         comment['id'] = id
     return json.dumps(comment)
