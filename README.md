@@ -22,5 +22,8 @@ Installation steps
 1. Run `pipenv install watchgod` to install
 1. Once you are running the sample database, create a new user, and log in to view the site. 🦮 Good Boy!!!🦮 Give yourself a treat!🦮 
 
-## Site Screenshots
+## User Experience
 
+Here is a quick overview of the user experience! Users can create posts, filter them by category, and add tags.
+
+![screen capture](screencapture/RareFilteringAndTagging.gif)
