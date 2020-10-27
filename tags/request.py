@@ -32,8 +32,12 @@ def get_single_tag(id):
         WHERE t.id = ?    
         """, (id, ))    
         row = db_cursor.fetchone()
-        tag = Tag(row['id'], row['name'])
-        return json.dumps(tag.__dict__)
+
+        if row:
+            tag = Tag(row['id'], row['name'])
+            return json.dumps(tag.__dict__)
+        else:
+            return False
 
 def create_tag(tag):
     with sqlite3.connect("./rare.db") as conn:
