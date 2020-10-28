@@ -111,8 +111,8 @@ CREATE TABLE `comment` (
   FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 );
 
-INSERT INTO 'comment' VALUES (null, 'this is a bad take', '3458694038', 15, 3);
-INSERT INTO 'comment' VALUES (null, 'this is a GREAT TAKE', '35739393933', 12, 4);
+INSERT INTO 'comment' VALUES (null, 'this is a bad take', 3458694038, 15, 3);
+INSERT INTO 'comment' VALUES (null, 'this is a GREAT TAKE', 357833933, 12, 4);
 
 
 

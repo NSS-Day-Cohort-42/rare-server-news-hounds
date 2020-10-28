@@ -1,3 +1,4 @@
+from comments.request import get_comments_by_post_id
 from posts.request import update_post
 from postTags import get_postTag_by_post_id, create_postTag, delete_postTag
 from tags import get_single_tag, get_all_tags, create_tag
@@ -77,7 +78,8 @@ class HandleRequests(BaseHTTPRequestHandler):
                 if id is not None:
                     response = get_single_post(id)
                 else:
-                    response = get_all_posts()            
+                    response = get_all_posts()   
+      
             # elif resource == "otherResource":
             # ...
             
@@ -93,6 +95,9 @@ class HandleRequests(BaseHTTPRequestHandler):
             
             if resource == "posts" and key == "category_id":
                 response = get_posts_by_category_id(value)
+
+            if resource == "comments" and key == "post_id":
+                response = get_comments_by_post_id(value)
             # if key == "yourKey" and resource == "yourResource":
             #     response = get_yourResource_by_yourKey(value)
             # ...
