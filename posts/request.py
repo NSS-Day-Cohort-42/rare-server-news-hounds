@@ -201,6 +201,11 @@ def delete_post(id):
             WHERE post_id = ?
             """, ( id, ))
 
+            db_cursor.execute("""
+            DELETE FROM comment
+            WHERE post_id = ?
+            """, ( id, ))
+
         return success
 
 def update_post(id, post):
