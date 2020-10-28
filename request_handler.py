@@ -1,3 +1,4 @@
+from comments.request import get_comments_by_post_id
 from posts.request import update_post
 from postTags import get_postTag_by_post_id, create_postTag, delete_postTag
 from tags import get_single_tag, get_all_tags, create_tag
@@ -7,6 +8,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 from users import get_all_users, get_single_user, create_user
 from posts import get_posts_by_user_id, create_post, get_all_posts, get_single_post, delete_post, get_posts_by_category_id, update_post
+from comments import create_comment 
 import json
 
 
@@ -76,7 +78,8 @@ class HandleRequests(BaseHTTPRequestHandler):
                 if id is not None:
                     response = get_single_post(id)
                 else:
-                    response = get_all_posts()            
+                    response = get_all_posts()   
+      
             # elif resource == "otherResource":
             # ...
             
@@ -92,6 +95,9 @@ class HandleRequests(BaseHTTPRequestHandler):
             
             if resource == "posts" and key == "category_id":
                 response = get_posts_by_category_id(value)
+
+            if resource == "comments" and key == "post_id":
+                response = get_comments_by_post_id(value)
             # if key == "yourKey" and resource == "yourResource":
             #     response = get_yourResource_by_yourKey(value)
             # ...
@@ -128,6 +134,8 @@ class HandleRequests(BaseHTTPRequestHandler):
           new_item = create_user(post_body)
         elif resource == "posts":
             new_item = create_post(post_body)
+        elif resource == "comments":
+            new_item = create_comment(post_body)
         # elif resource == " ":
         #   new_item = yourCreate_handler(post_body)
         #...

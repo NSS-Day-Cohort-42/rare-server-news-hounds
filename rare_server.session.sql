@@ -99,4 +99,20 @@ UPDATE post SET publication_time = 1318781876406
 
 INSERT INTO 'post' VALUES (null, 3, 2, 'I NEED', 'SOME TEST DATA', 1, 1, 'https://www.gannett-cdn.com/media/USATODAY/USATODAY/2013/02/20/c03-barkley-before-13-16_9.jpg', true, true);
 
-SELECT * FROM  post
+SELECT * FROM  post WHERE id = 3;
+
+CREATE TABLE `comment` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `content` INTEGER NOT NULL,
+  `timestamp` INTEGER NOT NULL,
+  `post_id` INTEGER NOT NULL,
+  `user_id` INTEGER NOT NULL,
+  FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+);
+
+INSERT INTO 'comment' VALUES (null, 'this is a bad take', 3458694038, 15, 3);
+INSERT INTO 'comment' VALUES (null, 'this is a GREAT TAKE', 357833933, 12, 4);
+
+
+
