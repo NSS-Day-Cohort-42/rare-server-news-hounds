@@ -9,17 +9,13 @@ As a team, we decided to implement the react-bootstrap styling library on this p
 
 ## Installation Instructions 
 Requirements:
-- Python 3.8.1 (One option is to install pyenv to manage python versions)
-- pipenv `pip3 install --user pipenv`
-- watchgod `pip install watchdog`
-
+- Python 3.8.1 
 
 Installation steps
 
 1. If you haven't already, visit https://github.com/NSS-Day-Cohort-42/rare-news-hounds, and follow the readme there to set up the client side of the application.
 1. Create a new directory for this project, and use the terminal to clone the project directory there: `git clone https://github.com/NSS-Day-Cohort-42/rare-server-news-hounds.git`
-1. Run `pipenv shell` to create a new virtual environment 
-1. Run `pipenv install watchgod` to install
+1. Run `python request_handler.py` to run the database.
 1. Once you are running the sample database, create a new user, and log in to view the site. 🦮 Good Boy!!!🦮 Give yourself a treat!🦮 
 
 ## User Experience
