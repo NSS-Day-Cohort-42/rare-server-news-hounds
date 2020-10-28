@@ -8,7 +8,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, get_single_category
 from users import get_all_users, get_single_user, create_user
 from posts import get_posts_by_user_id, create_post, get_all_posts, get_single_post, delete_post, get_posts_by_category_id, update_post
-from comments import create_comment 
+from comments import create_comment, delete_comment
 import json
 
 
@@ -173,6 +173,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             success = delete_post(id)
         elif resource == "post_tags":
             success = delete_postTag(id)
+        elif resource == "comments":
+            success = delete_comment(id)
         # elif resource == " ":
         #   success = delete_yourResource(id)
         # ...

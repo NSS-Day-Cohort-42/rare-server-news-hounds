@@ -43,7 +43,7 @@ def get_comments_by_post_id(post_id):
             comment.user = user.__dict__
         return json.dumps(comments)
 
-def delete_post(id):
+def delete_comment(id):
     with sqlite3.connect("./rare.db") as conn:
         db_cursor = conn.cursor()
         db_cursor.execute("""
